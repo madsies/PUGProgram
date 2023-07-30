@@ -2,6 +2,8 @@
 
 Practicing myself some Java
 
+Main file PUGProgram
+
 ## Brief
 
 Program for pugs, can either randomly select, Be manually selected or given a fair match
@@ -14,10 +16,10 @@ Program for pugs, can either randomly select, Be manually selected or given a fa
 ## Features
 
 - [ ] Add a pool of players, and give them a weight (i.e. skill) 
-- [ ] Players are seeded by their skill  [ ]
-- [ ] Individual Player stats, i.e. winrate  [ ]
-- [ ] Random player picker for team captains [ ]
-- [ ] Bracket creator for if 12 player (3v3v3v3) [ ]
+- [ ] Players are seeded by their skill  
+- [ ] Individual Player stats, i.e. winrate  
+- [ ] Random player picker for team captains 
+- [ ] Bracket creator for if 12 player (3v3v3v3)
 
 ## Possible Features
 
