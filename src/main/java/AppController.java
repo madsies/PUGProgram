@@ -131,8 +131,8 @@ public class AppController {
         return seedings;
     }
 
-    public void startMatch(ArrayList<String> team1, ArrayList<String> team2){
-        new Match(team1, team2, players);
+    public void startMatch(ArrayList<String> team1, ArrayList<String> team2, int bestOf){
+        new Match(team1, team2, players, bestOf);
     }
 
 }
