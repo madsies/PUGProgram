@@ -1,8 +1,8 @@
 # PUGProgram
 
-Practicing myself some C
+Practicing myself some Java
 
-## Breif
+## Brief
 
 Program for pugs, can either randomly select, Be manually selected or given a fair match
 
