@@ -35,4 +35,11 @@ public class Utils {
         add("ana");
     }};  // etc etc add the rest
 
+    public static final int HYBRID = 1;
+    public static final int PAYLOAD = 2;
+    public static final int CONTROL = 3;
+    public static final int PUSH = 4;
+    public static final int FLASHPOINT = 5;
+    public static final int ANY = 6;
+
 }

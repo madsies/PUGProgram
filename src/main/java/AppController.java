@@ -33,6 +33,9 @@ public class AppController {
             JSONParser parser = new JSONParser();
 
             // Need to translate JSON data the same way it is encoded, CHECK Player::exportDataToJson()
+            // TODO: Pretty high priority if possible, my brain is too fried to even try it, it shouldn't be too
+            // TODO: Hard in reality, its just a reverse of the function mentioned above
+            // https://howtodoinjava.com/java/library/json-simple-read-write-json-examples/
 
             Object obj = parser.parse(read);
         }
@@ -113,6 +116,19 @@ public class AppController {
             target = rand.nextInt(playerCount);
         }
         return target;
+    }
+
+    /*
+    ENUM for mode, i.e.
+    HYBRID - 1 - Utils.HYBRID
+    PAYLOAD - 2 - Utils.PAYLOAD
+    etc. etc.
+     */
+    public String randomMap(int mode){
+
+        // code would check the enum entered and then select randomly from the list of maps in Utils.java
+
+        return "banana";
     }
 
     public HashMap<String, ArrayList<String>> createBalancedMatch(int teamSize, ArrayList<String> playerPool, boolean tryRolePreference){

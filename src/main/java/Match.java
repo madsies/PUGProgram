@@ -17,6 +17,8 @@ public class Match {
     int bestOf;
     int currentMap;
 
+    // TODO: Data Struct and function that links maps and who won them, for data later, im too lazy rn.
+
 
     public Match(ArrayList<String> team1, ArrayList<String> team2, HashMap<String, Player> players, int bo){
         teamOne = team1;
@@ -37,6 +39,10 @@ public class Match {
 
         calculateMMRAverage();
     }
+
+    /*
+    Increments Score and goes to next map.
+     */
 
     public void mapFinished(int winner, ArrayList<String> players){
         if (winner == 1){
