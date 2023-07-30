@@ -1,6 +1,9 @@
 # PUGProgram
 Practicing myself some C
 
+## Breif
+Program for pugs, can either randomly select, Be manually selected or given a fair match
+
 ## Needs
 
 - GUI Library
@@ -13,4 +16,5 @@ Practicing myself some C
 
 ## Possible Features
 - Leaderboard of players
-- Connected discord bot
+- Connected discord bot (different lang, likely just python)
+
