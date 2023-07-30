@@ -1,4 +1,7 @@
+import org.json.simple.JSONObject;
+
 import static java.lang.Math.round;
+import static java.lang.Math.tan;
 
 public class Player
 {
@@ -14,8 +17,18 @@ public class Player
     private int mapDraws;
     private int mapLosses;
 
-    public Player(){
+    public Player(String un, int mmr, boolean sp, boolean tk, boolean DPS, int w, int l, int mw, int md, int ml){
         // Input will be the JSON Data, save to the variables in class.
+        username = un;
+        MMR = mmr;
+        support = sp;
+        tank = tk;
+        dps = DPS;
+        wins = w;
+        losses = l;
+        mapWins = mw;
+        mapDraws = md;
+        mapLosses = ml;
     }
 
     public int getMMR(){
@@ -88,17 +101,46 @@ public class Player
         return support;
     }
 
+    public void toggleSupport(){
+        support = !support;
+    }
+
     public boolean isTank(){
         return tank;
+    }
+
+    public void toggleTank(){
+        tank = !tank;
     }
 
     public boolean isDps(){
         return dps;
     }
 
+    public void toggleDps(){
+        dps = !dps;
+    }
+
     public String exportDataToJson(){
-        // WIP Used when saving data back to json.
-        return "WIP";
+        JSONObject obj = new JSONObject();
+        JSONObject statsObj = new JSONObject();
+        obj.put(username, statsObj);
+        statsObj.put("mmr", MMR);
+        statsObj.put("support", support);
+        statsObj.put("tank", tank);
+        statsObj.put("dps", dps);
+        statsObj.put("wins", wins);
+        statsObj.put("losses", losses);
+        statsObj.put("mapwins", mapWins);
+        statsObj.put("mapdraws", mapDraws);
+        statsObj.put("maplosses", mapLosses);
+
+        return obj.toJSONString();
+    }
+
+    public boolean validRoles(){
+        // Check if a player has at least a single role chosen.
+        return support || tank || dps;
     }
 
 

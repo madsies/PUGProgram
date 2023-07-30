@@ -33,12 +33,8 @@ public class AppController {
             Object obj = parser.parse(read);
         }
         catch(IOException e){
-            JSONObject playerWrapper = new JSONObject();
-            playerWrapper.put("players", "");
-            fileArray.add(playerWrapper);
 
             try (FileWriter file = new FileWriter("players.json")){
-                file.write(playerWrapper.toJSONString());
                 file.flush();
             }
             catch (IOException ee){
@@ -53,12 +49,7 @@ public class AppController {
             System.out.println("matches exist!");
         }
         catch(IOException e){
-            JSONObject matchWrapper = new JSONObject();
-            matchWrapper.put("matches", "");
-            fileArray.add(matchWrapper);
-
             try (FileWriter file = new FileWriter("matches.json")){
-                file.write(matchWrapper.toJSONString());
                 file.flush();
             }
             catch (IOException ee){
@@ -67,17 +58,26 @@ public class AppController {
 
         }
 
+        players.add(new Player("jeff2", 1000, true, false, false, 4, 2, 5, 2, 1));
 
+        savePlayers();
+    }
 
+    public void savePlayers(){
+        // Function needs to save data from players
 
+        try (FileWriter file = new FileWriter("players.json")){
 
-
-
-
-
-
+            for (Player p : players){
+                String jsonString = p.exportDataToJson();
+                file.write(jsonString);
+            }
+            file.flush();
+        }
+        catch (Exception e){
+            System.out.println("Failure when saving players... " + e);
+        }
 
 
     }
-
 }
