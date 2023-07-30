@@ -1,7 +1,6 @@
 import org.json.simple.JSONObject;
 
 import static java.lang.Math.round;
-import static java.lang.Math.tan;
 
 public class Player
 {

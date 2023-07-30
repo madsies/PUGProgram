@@ -15,7 +15,7 @@ public class MatchData {
     int bestOf; // i.e. bo3, bo5, bo7??
     int mapsPlayed;
 
-    public MatchData(){
+    public MatchData(String Map, int teamOneScore, int teamTwoScore, int bestOf){
 
     }
 }
