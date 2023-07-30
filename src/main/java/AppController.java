@@ -1,7 +1,6 @@
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -63,9 +62,26 @@ public class AppController {
 
         }
 
-        players.put("jeff2", new Player("jeff2", 1000, true, false, false, 4, 2, 5, 2, 1));
+        // Testing code to check that players are being serialised properly
+
+        createPlayer("jeff1");
+        createPlayer("jeff2");
+        createPlayer("jeff3");
+        createPlayer("jeff4");
+        createPlayer("jeff5");
+        createPlayer("jeff6");
 
         savePlayers();
+    }
+
+    public void createPlayer(String username, Integer MMR, boolean support, boolean tank, boolean dps){
+        players.put(username, new Player(username, MMR, support, tank, dps, 0, 0, 0, 0, 0));
+    }
+
+    // Mimicking optional Args using method overloading.
+
+    public void createPlayer(String username){
+        players.put(username, new Player(username, 1000,false, false, false, 0, 0, 0, 0, 0));
     }
 
     public void savePlayers(){
@@ -97,6 +113,14 @@ public class AppController {
             target = rand.nextInt(playerCount);
         }
         return target;
+    }
+
+    public HashMap<String, ArrayList<String>> createBalancedMatch(int teamSize, ArrayList<String> playerPool, boolean tryRolePreference){
+        HashMap<String, ArrayList<String>> teams = new HashMap<>();
+
+        // Compare MMR of players and try to balance teams as fair as possible.
+
+        return teams;
     }
 
     public HashMap<String, Integer> seedPlayers(){
