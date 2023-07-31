@@ -233,8 +233,13 @@ public class AppController {
         return player1.getMMR() - player2.getMMR();
     }
 
-    public HashMap<String, Integer> seedPlayers(){
-        HashMap<String, Integer> seedings = new HashMap<>();
+    public ArrayList<Player> seedPlayers(){
+        Collection<Player> temp = players.values();
+        Player[] temp2 = temp.toArray(new Player[0]);
+
+        Arrays.sort(temp2, Comparator.comparingInt(Player::getMMR));
+
+        ArrayList<Player> seedings = new ArrayList<>(Arrays.asList(temp2));
 
         // Needs to order the players by MMR rating, if seeding is same, random choice.
 

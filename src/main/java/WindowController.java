@@ -1,8 +1,13 @@
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.text.BoxView;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class WindowController {
 
@@ -10,10 +15,13 @@ public class WindowController {
     private JPanel sidePanel;
     private int activeScreen;
     private boolean active;
+    private JPanel leaderboardPanel;
+    private AppController controller;
 
-    public WindowController() {
+    public WindowController(AppController ac) {
 
         // Basic Initialisation
+        controller = ac;
 
         active = true;
 
@@ -35,8 +43,36 @@ public class WindowController {
                 frame.dispose();
             }
         });
+        setUpLeaderboard();
         activeScreen = 1;
         frame.setVisible(true);
+    }
+
+    public void setUpLeaderboard(){
+        leaderboardPanel = new JPanel();
+        leaderboardPanel.setLayout(new BoxLayout(leaderboardPanel, BoxLayout.Y_AXIS));
+        leaderboardPanel.setPreferredSize(new Dimension(1280, 720));
+        leaderboardPanel.add(new Label("Leaderboard"){{setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 50));}});
+        ScrollPane pane = new ScrollPane(ScrollPane.SCROLLBARS_AS_NEEDED);
+        pane.setPreferredSize(new Dimension(400, 720));
+        JPanel innerPanel = new JPanel();
+        innerPanel.setLayout(new BoxLayout(innerPanel, BoxLayout.Y_AXIS));
+
+        pane.add(innerPanel);
+        ArrayList<Player> seeded = controller.seedPlayers();
+        for (Player p:
+             seeded) {
+            JLabel label = new JLabel(p.getName()+" - "+p.getMMR());
+            EmptyBorder insets = new EmptyBorder(50, 175, 50, 175);
+            label.setBorder(insets);
+            label.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 50));
+            innerPanel.add(label);
+            innerPanel.setVisible(true);
+        }
+        leaderboardPanel.setVisible(true);
+        leaderboardPanel.add(pane);
+        frame.add(leaderboardPanel);
+
     }
 
     public boolean isActive(){

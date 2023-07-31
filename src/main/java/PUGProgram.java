@@ -28,7 +28,7 @@ class PUGProgram {
         games = 0;
 
         // All window functions here
-        window = new WindowController();
+        window = new WindowController(controller);
 
         System.out.println("Startup Completed...");
 
