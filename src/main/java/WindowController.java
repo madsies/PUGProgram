@@ -15,7 +15,6 @@ public class WindowController {
 
         frame = new Frame();
         sidePanel = new JPanel();
-        AppController test = new AppController();
         sidePanel.add(new TextArea() {{
             setText("Test!");
         }});
@@ -27,6 +26,10 @@ public class WindowController {
         frame.add(sidePanel);
         activeScreen = 1;
         frame.setVisible(true);
+    }
+
+    public boolean isActive(){
+        return false;
     }
 
 

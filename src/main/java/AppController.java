@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.Set;
 
 import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
@@ -34,6 +35,10 @@ public class AppController {
             JSONArray data = (JSONArray) obj;
 
             // Iter through data in array, make player object, put in players array bla bla bla
+            for (Object object : data){
+
+                break;
+            }
 
         }
         catch(IOException e){
@@ -64,13 +69,6 @@ public class AppController {
         }
 
         // Testing code to check that players are being serialised properly
-
-        createPlayer("jeff1");
-        createPlayer("jeff2");
-        createPlayer("jeff3");
-        createPlayer("jeff4");
-        createPlayer("jeff5");
-        createPlayer("jeff6");
 
         savePlayers();
     }
