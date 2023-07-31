@@ -187,6 +187,7 @@ public class AppController {
                 return "error";
             }
         }
+        return "error";
     }
 
     public HashMap<String, ArrayList<String>> createBalancedMatch(int teamSize, ArrayList<String> playerPool, boolean tryRolePreference){
