@@ -108,6 +108,5 @@ public class WindowController {
     public void update() {
         tick++;
         if (tick % 300 == 0) updateLeaderboard();
-        System.out.println("tock");
     }
 }
