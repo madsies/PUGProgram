@@ -28,6 +28,7 @@ class PUGProgram {
 
     private void shutDown(){
         controller.savePlayers();
+        System.out.println("Shutting down... ");
     }
 
 

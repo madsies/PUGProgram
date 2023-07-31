@@ -36,8 +36,13 @@ public class AppController {
 
             // Iter through data in array, make player object, put in players array bla bla bla
             for (Object object : data){
+                JSONObject jsonObj = (JSONObject) object;
+                Set<Object> values = (Set<Object>) jsonObj.keySet();
+                String name = (String) values.iterator().next();
 
-                break;
+                JSONObject pData = (JSONObject) jsonObj.get(name);
+                int x = ((Long) pData.get("mmr")).intValue();
+                System.out.println(x);
             }
 
         }
