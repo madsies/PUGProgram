@@ -149,10 +149,44 @@ public class AppController {
     etc. etc.
      */
     public String randomMap(int mode){
+        Random r = new Random();
+        int index = 0;
 
         // code would check the enum entered and then select randomly from the list of maps in Utils.java
-
-        return "banana";
+        switch (mode) {
+            case Utils.HYBRID -> { // 1
+                index = r.nextInt(Utils.HYBRID_MAPS.size());
+                return Utils.HYBRID_MAPS.get(index);
+            }
+            case Utils.PAYLOAD -> { // 2
+                index = r.nextInt(Utils.PAYLOAD_MAPS.size());
+                return Utils.PAYLOAD_MAPS.get(index);
+            }
+            case Utils.CONTROL -> { // 3
+                index = r.nextInt(Utils.CONTROL_MAPS.size());
+                return Utils.CONTROL_MAPS.get(index);
+            }
+            case Utils.PUSH -> { // 4
+                index = r.nextInt(Utils.PUSH_MAPS.size());
+                return Utils.PUSH_MAPS.get(index);
+            }
+            case Utils.FLASHPOINT -> { // 5 WIP
+                break;
+            }
+            case Utils.ANY -> { // 6
+                index = r.nextInt(Utils.HYBRID_MAPS.size() + Utils.PAYLOAD_MAPS.size() + Utils.CONTROL_MAPS.size() + Utils.PUSH_MAPS.size()); // Add flashpoint when it exists
+                ArrayList<String> maps = new ArrayList<>(){{
+                    addAll(Utils.HYBRID_MAPS);
+                    addAll(Utils.PAYLOAD_MAPS);
+                    addAll(Utils.CONTROL_MAPS);
+                    addAll(Utils.PUSH_MAPS);
+                }};
+                return maps.get(index);
+            }
+            default -> {
+                return "error";
+            }
+        }
     }
 
     public HashMap<String, ArrayList<String>> createBalancedMatch(int teamSize, ArrayList<String> playerPool, boolean tryRolePreference){
