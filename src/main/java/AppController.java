@@ -240,6 +240,7 @@ public class AppController {
         Arrays.sort(temp2, Comparator.comparingInt(Player::getMMR));
 
         ArrayList<Player> seedings = new ArrayList<>(Arrays.asList(temp2));
+        Collections.reverse(seedings);
 
         // Needs to order the players by MMR rating, if seeding is same, random choice.
 
