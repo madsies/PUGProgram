@@ -9,12 +9,13 @@ public class WindowController {
     private Frame frame;
     private JPanel sidePanel;
     private int activeScreen;
-    private boolean active = true;
-
+    private boolean active;
 
     public WindowController() {
 
         // Basic Initialisation
+
+        active = true;
 
         frame = new Frame();
         sidePanel = new JPanel();
@@ -44,5 +45,6 @@ public class WindowController {
 
 
     public void update() {
+
     }
 }

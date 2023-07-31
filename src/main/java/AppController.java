@@ -28,7 +28,7 @@ public class AppController {
 
         try (FileReader read = new FileReader("players.json")){
             //idk do something, load data etc.
-            System.out.println("players exist!");
+            System.out.println("Loading players...");
             JSONParser parser = new JSONParser();
 
             Object obj = parser.parse(read);
@@ -61,7 +61,7 @@ public class AppController {
 
         try (FileReader read = new FileReader("matches.json")){
             //idk do something, load data etc.
-            System.out.println("matches exist!");
+            System.out.println("Loading Matches...");
         }
         catch(IOException e){
             try (FileWriter file = new FileWriter("matches.json")){

@@ -1,8 +1,9 @@
+import java.util.concurrent.TimeUnit;
 
 class PUGProgram {
 
-    private final WindowController window;
-    private final AppController controller;
+    private WindowController window;
+    private AppController controller;
     private boolean active = true;
 
     public static void main(String[] args) {
@@ -13,7 +14,7 @@ class PUGProgram {
     /*
     Startup logic, before window etc.
      */
-    PUGProgram(){
+    PUGProgram() {
         // All controller functions here
         controller = new AppController();
 
@@ -24,6 +25,8 @@ class PUGProgram {
         window = new WindowController();
 
         System.out.println("Startup Completed...");
+
+        active = true;
         mainLoop();
         shutDown();
     }
@@ -31,15 +34,21 @@ class PUGProgram {
     /*
     Updated constantly, checks for values etc.
      */
-    private void mainLoop(){
+    private void mainLoop() {
         while (active){
             // Controller Functions
 
-            //Window Functions
+            // Window Functions
             window.update();
 
-
             active = window.isActive();
+            try{
+                // Constant updates with no wait causes bad
+                TimeUnit.MILLISECONDS.sleep(16);
+            }
+            catch (InterruptedException e){
+                System.out.println("how the hell");
+            }
         }
     }
 
