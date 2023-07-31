@@ -127,7 +127,6 @@ public class AppController {
                 arr.add(jsonString);
             }
             file.write(arr.toJSONString());
-            file.flush();
         }
         catch (Exception e){
             System.out.println("Failure when saving players... " + e);
@@ -246,16 +245,34 @@ public class AppController {
         Returns the id of match (for tracking)
      */
 
-    public UUID startMatch(ArrayList<String> team1, ArrayList<String> team2, int bestOf){
+    public UUID startMatch(Team team1, Team team2, int bestOf){
         UUID uuid = UUID.randomUUID();
         matchPool.put(uuid, new Match(team1, team2, players, bestOf));
         return uuid;
+    }
+
+    /*
+        For UI to talk to controller instead of match class.
+        returns if successful.
+     */
+
+    public boolean nextMap(UUID uuid, int winner, String map){
+        Match m;
+        if ((m = matchPool.get(uuid)) == null) return false;
+
+        m.mapFinished(winner);
+        if (!m.isGameOver()) {
+            m.startNewMap(map);
+            return true;
+        }
+        return false;
     }
 
     // checks if game is over first
     public void endMatch(UUID uuid){
         if (matchPool.get(uuid).isGameOver()){
             matchPool.get(uuid).endGame();
+            System.out.println("Game "+uuid+" Over.");
             matchPool.remove(uuid);
         }
     }
@@ -265,6 +282,49 @@ public class AppController {
     public void forceEndMatch(UUID uuid){
         matchPool.get(uuid).endGame();
         matchPool.remove(uuid);
+    }
+
+    /*
+        Purely for testing
+     */
+    public ArrayList<Team> createDummyTeams(){
+        createPlayer("a", 0, true, false, false);
+        createPlayer("b", 0, false, true, true);
+        createPlayer("c", 0, true, false, false);
+        createPlayer("d", 0, false, true, true);
+        createPlayer("e", 0, true, false, false);
+        createPlayer("f", 0, false, true, true);
+        createPlayer("g", 0, true, false, false);
+        createPlayer("h", 0, false, true, true);
+        createPlayer("i", 0, true, false, false);
+        createPlayer("j", 0, false, true, true);
+
+        Team t1 = new Team();
+        t1.addBench(players.get("a"));
+        t1.setTank(players.get("a"));
+        t1.addBench(players.get("b"));
+        t1.setDPS(players.get("b"), 1);
+        t1.addBench(players.get("c"));
+        t1.setDPS(players.get("c"), 2);
+        t1.addBench(players.get("d"));
+        t1.setSupport(players.get("d"), 1);
+        t1.addBench(players.get("e"));
+        t1.setSupport(players.get("e"), 2);
+
+        Team t2 = new Team();
+        t2.addBench(players.get("f"));
+        t2.setTank(players.get("f"));
+        t2.addBench(players.get("g"));
+        t2.setDPS(players.get("g"), 1);
+        t2.addBench(players.get("h"));
+        t2.setDPS(players.get("h"), 2);
+        t2.addBench(players.get("i"));
+        t2.setSupport(players.get("i"), 1);
+        t2.addBench(players.get("j"));
+        t2.setSupport(players.get("j"), 2);
+        System.out.println(t2);
+
+        return new ArrayList<>(){{add(t1);add(t2);}};
     }
 
 }

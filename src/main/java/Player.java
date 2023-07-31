@@ -30,6 +30,15 @@ public class Player
         mapLosses = ml;
     }
 
+    public String getName(){
+        return username;
+    }
+
+    @Override
+    public String toString() {
+        return username;
+    }
+
     public int getMMR(){
         return MMR;
     }
