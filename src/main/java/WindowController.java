@@ -97,6 +97,7 @@ public class WindowController {
             leaderboardInner.setVisible(true);
         }
         leaderboardInner.setVisible(true);
+        SwingUtilities.updateComponentTreeUI(frame);
     }
 
     public boolean isActive(){
