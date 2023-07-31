@@ -25,20 +25,15 @@ public class AppController {
 
          */
 
-        JSONArray fileArray = new JSONArray();
-
         try (FileReader read = new FileReader("players.json")){
             //idk do something, load data etc.
             System.out.println("players exist!");
             JSONParser parser = new JSONParser();
 
-            // Need to translate JSON data the same way it is encoded, CHECK Player::exportDataToJson()
-            // TODO: Pretty high priority if possible, my brain is too fried to even try it, it shouldn't be too
-            // TODO: Hard in reality, its just a reverse of the function mentioned above
-            // https://howtodoinjava.com/java/library/json-simple-read-write-json-examples/
-
             Object obj = parser.parse(read);
             JSONArray data = (JSONArray) obj;
+
+            // Iter through data in array, make player object, put in players array bla bla bla
 
         }
         catch(IOException e){
@@ -79,6 +74,14 @@ public class AppController {
 
         savePlayers();
     }
+
+    // For when loading from file.
+
+    public void createPlayer(String username, Integer MMR, boolean support, boolean tank, boolean dps, int win, int loss, int mwin, int mdraw, int mloss){
+        players.put(username, new Player(username, MMR, support, tank, dps, win, loss, mwin, mdraw, mloss));
+    }
+
+    // New players who specified roles.
 
     public void createPlayer(String username, Integer MMR, boolean support, boolean tank, boolean dps){
         players.put(username, new Player(username, MMR, support, tank, dps, 0, 0, 0, 0, 0));
@@ -121,6 +124,22 @@ public class AppController {
             target = rand.nextInt(playerCount);
         }
         return target;
+    }
+
+    public boolean playerExists(String name){
+        return players.containsKey(name);
+    }
+
+    /*
+    Boolean returns to tell program if player was deleted or not
+     */
+
+    public boolean removePlayer(String name, Boolean sure, Boolean reallySure){
+        if (!sure || !reallySure) return false;
+        if (players.remove(name) == null) return false;
+
+        savePlayers();
+        return true;
     }
 
     /*
