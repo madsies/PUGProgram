@@ -16,7 +16,9 @@ public class WindowController {
     private int activeScreen;
     private boolean active;
     private JPanel leaderboardPanel;
+    private JPanel leaderboardInner;
     private AppController controller;
+    int tick = 0;
 
     public WindowController(AppController ac) {
 
@@ -55,10 +57,10 @@ public class WindowController {
         leaderboardPanel.add(new Label("Leaderboard"){{setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 50));}});
         ScrollPane pane = new ScrollPane(ScrollPane.SCROLLBARS_AS_NEEDED);
         pane.setPreferredSize(new Dimension(400, 720));
-        JPanel innerPanel = new JPanel();
-        innerPanel.setLayout(new BoxLayout(innerPanel, BoxLayout.Y_AXIS));
+        leaderboardInner = new JPanel();
+        leaderboardInner.setLayout(new BoxLayout(leaderboardInner, BoxLayout.Y_AXIS));
 
-        pane.add(innerPanel);
+        pane.add(leaderboardInner);
         ArrayList<Player> seeded = controller.seedPlayers();
         for (Player p:
              seeded) {
@@ -66,13 +68,35 @@ public class WindowController {
             EmptyBorder insets = new EmptyBorder(50, 175, 50, 175);
             label.setBorder(insets);
             label.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 50));
-            innerPanel.add(label);
-            innerPanel.setVisible(true);
+            leaderboardInner.add(label);
+            leaderboardInner.setVisible(true);
         }
         leaderboardPanel.setVisible(true);
         leaderboardPanel.add(pane);
         frame.add(leaderboardPanel);
 
+    }
+
+    /*
+
+    Does not work, unsure how i'll ever make it work
+    help
+
+     */
+    public void updateLeaderboard(){
+        leaderboardInner.removeAll();
+        leaderboardInner.setLayout(new BoxLayout(leaderboardInner, BoxLayout.Y_AXIS));
+        ArrayList<Player> seeded = controller.seedPlayers();
+        for (Player p:
+                seeded) {
+            JLabel label = new JLabel(p.getName()+" - "+p.getMMR());
+            EmptyBorder insets = new EmptyBorder(50, 175, 50, 175);
+            label.setBorder(insets);
+            label.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 50));
+            leaderboardInner.add(label);
+            leaderboardInner.setVisible(true);
+        }
+        leaderboardInner.setVisible(true);
     }
 
     public boolean isActive(){
@@ -81,6 +105,8 @@ public class WindowController {
 
 
     public void update() {
-
+        tick++;
+        if (tick % 300 == 0) updateLeaderboard();
+        System.out.println("tock");
     }
 }
