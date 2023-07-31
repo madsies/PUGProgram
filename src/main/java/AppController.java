@@ -35,14 +35,27 @@ public class AppController {
             JSONArray data = (JSONArray) obj;
 
             // Iter through data in array, make player object, put in players array bla bla bla
-            for (Object object : data){
+            for (Object object : data) {
+
                 JSONObject jsonObj = (JSONObject) object;
                 Set<Object> values = (Set<Object>) jsonObj.keySet();
                 String name = (String) values.iterator().next();
 
                 JSONObject pData = (JSONObject) jsonObj.get(name);
-                int x = ((Long) pData.get("mmr")).intValue();
-                System.out.println(x);
+
+                // Stores JSON data to variables
+                int mmr = ((Long) pData.get("mmr")).intValue();
+                int win = ((Long) pData.get("wins")).intValue();
+                int loss = ((Long) pData.get("losses")).intValue();
+                int mwins = ((Long) pData.get("mapwins")).intValue();
+                int mdraw = ((Long) pData.get("mapdraws")).intValue();
+                int mloss = ((Long) pData.get("maplosses")).intValue();
+                boolean tank = (boolean) pData.get("tank");
+                boolean dps = (boolean) pData.get("dps");
+                boolean support = (boolean) pData.get("support");
+
+                // Calls create player to add new instance to hash map
+                createPlayer(name,mmr,support,tank,dps,win,loss,mwins,mdraw,mloss);
             }
 
         }
@@ -74,7 +87,6 @@ public class AppController {
         }
 
         // Testing code to check that players are being serialised properly
-
         savePlayers();
     }
 

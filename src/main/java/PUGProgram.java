@@ -2,6 +2,7 @@ import java.util.concurrent.TimeUnit;
 
 class PUGProgram {
 
+
     private WindowController window;
     private AppController controller;
     private boolean active = true;
