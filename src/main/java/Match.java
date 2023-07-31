@@ -154,7 +154,7 @@ public class Match {
 
             // MMR Diff, every enemy +25 avg is +1 more MMR, up to +-10MMR
 
-            if(teamOne.getFullTeam().contains(player)){
+            if(matchWinner == 1 && diff > 0 || matchWinner == 2 && diff < 0){
                 val -= diff;
             }
             else{
