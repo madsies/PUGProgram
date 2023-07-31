@@ -41,19 +41,20 @@ public class AppController {
                 String name = (String) values.iterator().next();
 
                 JSONObject pData = (JSONObject) jsonObj.get(name);
-                System.out.println("------------------");
-                System.out.println("Player: "+name);
-                System.out.println("------------------");
-                System.out.println("Wins: "+pData.get("wins"));
-                System.out.println("Losses: "+pData.get("losses"));
-                System.out.println("Map wins: "+pData.get("mapwins"));
-                System.out.println("Map draws: "+pData.get("mapdraws"));
-                System.out.println("Map losses: "+pData.get("maplosses"));
-                System.out.println("MMR: "+pData.get("mmr"));
-                System.out.println("Tank: "+pData.get("tank"));
-                System.out.println("DPS: "+pData.get("dps"));
-                System.out.println("Support: "+pData.get("support"));
 
+                // Stores JSON data to variables
+                int mmr = ((Long) pData.get("mmr")).intValue();
+                int win = ((Long) pData.get("wins")).intValue();
+                int loss = ((Long) pData.get("losses")).intValue();
+                int mwins = ((Long) pData.get("mapwins")).intValue();
+                int mdraw = ((Long) pData.get("mapdraws")).intValue();
+                int mloss = ((Long) pData.get("maplosses")).intValue();
+                boolean tank = (boolean) pData.get("tank");
+                boolean dps = (boolean) pData.get("dps");
+                boolean support = (boolean) pData.get("support");
+
+                // Calls create player to add new instance to hash map
+                createPlayer(name,mmr,support,tank,dps,win,loss,mwins,mdraw,mloss);
             }
 
         }
@@ -86,7 +87,7 @@ public class AppController {
 
         // Testing code to check that players are being serialised properly
 
-        createPlayer("jeff1");
+        createPlayer("jeff1",3210,true,false,true,40,20,100,5,30);
         createPlayer("jeff2");
         createPlayer("jeff3");
         createPlayer("jeff4");
