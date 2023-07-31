@@ -9,18 +9,39 @@ public class Utils {
 
     public static final ArrayList<String> HYBRID_MAPS = new ArrayList<>(){{
         add("numbani");
+        add("kings-row");
+        add("eichenwalde");
+        add("blizzard-world");
+        add("paraiso");
+        add("midtown");
+        add("hollywood");
     }};  // etc etc add the rest
     public static final ArrayList<String> PAYLOAD_MAPS = new ArrayList<>(){{
         add("junkertown");
+        add("havana");
+        add("circuit-royal");
+        add("dorado");
+        add("route-66");
+        add("rialto");
+        add("watchpoint-gibraltar");
+        add("shambali-monestary");
     }};  // etc etc add the rest
     public static final ArrayList<String> PUSH_MAPS = new ArrayList<>(){{
-        add("newqueensstreet");
+        add("new-queens-street");
+        add("colosseo");
+        add("esperanca");
     }};  // etc etc add the rest
     public static final ArrayList<String> CONTROL_MAPS = new ArrayList<>(){{
         add("illios");
+        add("busan");
+        add("nepal");
+        add("oasis");
+        add("lijang-tower");
+        add("antarctic-peninsula");
     }};  // etc etc add the rest
     public static final ArrayList<String> FLASHPOINT_MAPS = new ArrayList<>(){{
-        add("???");
+        add("the-indian-one");
+        add("junkertown-two-electric-boogaloo");
     }};  // etc etc add the rest
 
     public static final ArrayList<String> DPS_HERO = new ArrayList<>(){{

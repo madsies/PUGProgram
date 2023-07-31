@@ -16,6 +16,7 @@ public class Match {
     int teamTwoScore;
     int bestOf;
     int currentMap;
+    String map;
 
     // TODO: Data Struct and function that links maps and who won them, for data later, im too lazy rn.
 
@@ -41,26 +42,34 @@ public class Match {
     }
 
     /*
-    Increments Score and goes to next map.
-     */
+    Increments Score
+    */
 
-    public void mapFinished(int winner, ArrayList<String> players){
+    public void mapFinished(int winner){
         if (winner == 1){
             teamOneScore++;
         }
         else if (winner == 2){
             teamTwoScore++;
         }
+    }
+
+    /*
+    Starts new map and records who is playing for MMR calc
+    */
+
+    public void startNewMap(String nextMap, ArrayList<String> players){
+        currentMap++;
+        map = nextMap;
 
         // Add 1 to maps played
         for (String p : players){
             mapsPlayed.put(p, mapsPlayed.get(p)+1);
         }
-        currentMap++;
     }
 
     public boolean isGameOver(){
-        return (currentMap > bestOf || teamOneScore > bestOf/2 || teamTwoScore > bestOf/2);
+        return (currentMap >= bestOf || teamOneScore > bestOf/2 || teamTwoScore > bestOf/2);
     }
 
     public void calculateMMRAverage(){
@@ -100,7 +109,7 @@ public class Match {
 
 
             //? Map played Scalar, 2/3 maps == 66% MMR gain/loss etc. etc.
-            val = round(val * ((float) mapsPlayed.get(player) /(currentMap-1)));
+            val = round(val * ((float) mapsPlayed.get(player) /(currentMap)));
         }
 
         // won't actually return will just change players MMR Stat eventually.

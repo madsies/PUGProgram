@@ -93,6 +93,16 @@ public class AppController {
         players.put(username, new Player(username, 1000,false, false, false, 0, 0, 0, 0, 0));
     }
 
+    /*
+    Returns null if name does not exist
+
+    Function if another part of the program needs to access player data independently.
+     */
+
+    public Player getPlayer(String username){
+        return players.get(username);
+    }
+
     public void savePlayers(){
         // Function needs to save data from players
         JSONArray arr = new JSONArray();
@@ -130,8 +140,10 @@ public class AppController {
         return players.containsKey(name);
     }
 
+
     /*
     Boolean returns to tell program if player was deleted or not
+    don't see why this would be needed in live but good for testing.
      */
 
     public boolean removePlayer(String name, Boolean sure, Boolean reallySure){
@@ -195,7 +207,15 @@ public class AppController {
 
         // Compare MMR of players and try to balance teams as fair as possible.
 
+        // return value "team1" : playerNameArray,  "team2" : playerNameArray
         return teams;
+    }
+
+    /*
+    Returns the difference in mmr between two players, if positive, player1 is higher, if negative, player2 is higher
+     */
+    public int MMRDifference(Player player1, Player player2){
+        return player1.getMMR() - player2.getMMR();
     }
 
     public HashMap<String, Integer> seedPlayers(){
