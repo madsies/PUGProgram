@@ -1,10 +1,7 @@
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
@@ -17,6 +14,7 @@ public class AppController {
      */
 
     HashMap<String, Player> players = new HashMap<>();
+    HashMap<UUID, Match> matchPool = new HashMap<>();
 
     public AppController() {
 
@@ -150,6 +148,9 @@ public class AppController {
         }
         return target;
     }
+    /*
+        Useful check for when trying to add player, don't want to erase data.
+     */
 
     public boolean playerExists(String name){
         return players.containsKey(name);
@@ -241,8 +242,29 @@ public class AppController {
         return seedings;
     }
 
-    public void startMatch(ArrayList<String> team1, ArrayList<String> team2, int bestOf){
-        new Match(team1, team2, players, bestOf);
+    /*
+        Returns the id of match (for tracking)
+     */
+
+    public UUID startMatch(ArrayList<String> team1, ArrayList<String> team2, int bestOf){
+        UUID uuid = UUID.randomUUID();
+        matchPool.put(uuid, new Match(team1, team2, players, bestOf));
+        return uuid;
+    }
+
+    // checks if game is over first
+    public void endMatch(UUID uuid){
+        if (matchPool.get(uuid).isGameOver()){
+            matchPool.get(uuid).endGame();
+            matchPool.remove(uuid);
+        }
+    }
+
+    // force ends match
+
+    public void forceEndMatch(UUID uuid){
+        matchPool.get(uuid).endGame();
+        matchPool.remove(uuid);
     }
 
 }

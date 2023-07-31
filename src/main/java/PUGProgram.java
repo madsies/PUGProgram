@@ -2,7 +2,6 @@ import java.util.concurrent.TimeUnit;
 
 class PUGProgram {
 
-
     private WindowController window;
     private AppController controller;
     private boolean active = true;
@@ -19,7 +18,7 @@ class PUGProgram {
         // All controller functions here
         controller = new AppController();
 
-        controller.createPlayer("JohnnyG", 9001, true, false, false);
+        controller.createPlayer("steven", 69, true, false, false);
         controller.createPlayer("super", 6969, false, true, true);
 
         // All window functions here
@@ -44,7 +43,7 @@ class PUGProgram {
 
             active = window.isActive();
             try{
-                // Constant updates with no wait causes bad
+                // Constant updates with no wait causes bad, approx 60Hz
                 TimeUnit.MILLISECONDS.sleep(16);
             }
             catch (InterruptedException e){
@@ -60,7 +59,5 @@ class PUGProgram {
         controller.savePlayers();
         System.out.println("Shutting down... ");
     }
-
-
 
 }
