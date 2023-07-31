@@ -52,6 +52,8 @@ public class Match {
         else if (winner == 2){
             teamTwoScore++;
         }
+
+        // Recording stuff for file bla bla, map played, winner, who played
     }
 
     /*

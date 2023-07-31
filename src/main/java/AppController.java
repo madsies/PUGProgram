@@ -28,7 +28,7 @@ public class AppController {
 
         try (FileReader read = new FileReader("players.json")){
             //idk do something, load data etc.
-            System.out.println("players exist!");
+            System.out.println("Loading players...");
             JSONParser parser = new JSONParser();
 
             Object obj = parser.parse(read);
@@ -36,6 +36,7 @@ public class AppController {
 
             // Iter through data in array, make player object, put in players array bla bla bla
             for (Object object : data) {
+
                 JSONObject jsonObj = (JSONObject) object;
                 Set<Object> values = (Set<Object>) jsonObj.keySet();
                 String name = (String) values.iterator().next();
@@ -73,7 +74,7 @@ public class AppController {
 
         try (FileReader read = new FileReader("matches.json")){
             //idk do something, load data etc.
-            System.out.println("matches exist!");
+            System.out.println("Loading Matches...");
         }
         catch(IOException e){
             try (FileWriter file = new FileWriter("matches.json")){
@@ -86,14 +87,6 @@ public class AppController {
         }
 
         // Testing code to check that players are being serialised properly
-
-        createPlayer("jeff1",3210,true,false,true,40,20,100,5,30);
-        createPlayer("jeff2");
-        createPlayer("jeff3");
-        createPlayer("jeff4");
-        createPlayer("jeff5");
-        createPlayer("jeff6");
-
         savePlayers();
     }
 
