@@ -13,15 +13,16 @@ class PUGProgram {
         window = new WindowController();
         controller = new AppController();
 
+        controller.createPlayer("JohnnyG", 9001, true, false, false);
+        controller.createPlayer("super", 6969, false, true, true);
+
         mainLoop();
         shutDown();
     }
 
     private void mainLoop(){
         while (active){
-            controller.createPlayer("JohnnyG", 9001, true, false, false);
-            controller.createPlayer("super", 6969, false, true, true);
-
+            window.update();
             active = window.isActive();
         }
     }
