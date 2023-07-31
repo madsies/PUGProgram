@@ -38,6 +38,8 @@ public class AppController {
             // https://howtodoinjava.com/java/library/json-simple-read-write-json-examples/
 
             Object obj = parser.parse(read);
+            JSONArray data = (JSONArray) obj;
+
         }
         catch(IOException e){
 
@@ -47,8 +49,9 @@ public class AppController {
             catch (IOException ee){
                 ee.printStackTrace();
             }
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
+        }
+        catch (ParseException e){
+            System.out.println("OOPSIE "+e);
         }
 
         try (FileReader read = new FileReader("matches.json")){
@@ -89,13 +92,15 @@ public class AppController {
 
     public void savePlayers(){
         // Function needs to save data from players
+        JSONArray arr = new JSONArray();
 
         try (FileWriter file = new FileWriter("players.json")){
 
             for (Player p : players.values()){
-                String jsonString = p.exportDataToJson();
-                file.write(jsonString);
+                JSONObject jsonString = p.exportDataToJson();
+                arr.add(jsonString);
             }
+            file.write(arr.toJSONString());
             file.flush();
         }
         catch (Exception e){

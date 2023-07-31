@@ -120,7 +120,7 @@ public class Player
         dps = !dps;
     }
 
-    public String exportDataToJson(){
+    public JSONObject exportDataToJson(){
         JSONObject obj = new JSONObject();
         JSONObject statsObj = new JSONObject();
         obj.put(username, statsObj);
@@ -134,7 +134,7 @@ public class Player
         statsObj.put("mapdraws", mapDraws);
         statsObj.put("maplosses", mapLosses);
 
-        return obj.toJSONString();
+        return obj;
     }
 
     public boolean validRoles(){
