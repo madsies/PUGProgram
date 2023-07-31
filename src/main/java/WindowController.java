@@ -13,12 +13,19 @@ public class WindowController {
 
     private Frame frame;
     private JPanel sidePanel;
-    private int activeScreen;
     private boolean active;
     private JPanel leaderboardPanel;
     private JPanel leaderboardInner;
+    private boolean leaderboard;
+
+    private boolean main;
+    private JPanel mainPanel;
+    private JPanel mainPanelLeft;
+
+
     private AppController controller;
     int tick = 0;
+
 
     public WindowController(AppController ac) {
 
@@ -26,18 +33,13 @@ public class WindowController {
         controller = ac;
 
         active = true;
-
+        main = true;
         frame = new Frame();
-        sidePanel = new JPanel();
-        sidePanel.add(new TextArea() {{
-            setText("Test!");
-        }});
-        sidePanel.setVisible(true);
 
         frame.setTitle("Overwatch PUG tool");
         frame.setSize(1280, 720);
+        frame.setPreferredSize(new Dimension(1280, 720));
 
-        frame.add(sidePanel);
         frame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -45,8 +47,9 @@ public class WindowController {
                 frame.dispose();
             }
         });
+
+        setUpMain();
         setUpLeaderboard();
-        activeScreen = 1;
         frame.setVisible(true);
     }
 
@@ -67,14 +70,31 @@ public class WindowController {
             JLabel label = new JLabel(p.getName()+" - "+p.getMMR());
             EmptyBorder insets = new EmptyBorder(50, 175, 50, 175);
             label.setBorder(insets);
-            label.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 50));
+            label.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 50));
             leaderboardInner.add(label);
-            leaderboardInner.setVisible(true);
         }
-        leaderboardPanel.setVisible(true);
+        leaderboardPanel.setVisible(leaderboard);
         leaderboardPanel.add(pane);
         frame.add(leaderboardPanel);
+    }
 
+    public void setUpMain(){
+
+        mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.X_AXIS));
+        mainPanel.setPreferredSize(new Dimension(1280, 720));
+
+        mainPanelLeft = new JPanel();
+        mainPanelLeft.setLayout(new BoxLayout(mainPanelLeft, BoxLayout.Y_AXIS));
+        mainPanelLeft.setPreferredSize(new Dimension(400, 720));
+
+        JButton leaderboardButton = new JButton("Test"){{setBackground(Color.BLACK);}};
+        leaderboardButton.setPreferredSize(new Dimension(300, 100));
+        mainPanelLeft.add(leaderboardButton);
+
+        mainPanel.add(mainPanelLeft);
+        mainPanel.setVisible(main);
+        frame.add(mainPanel);
     }
 
     /*
@@ -92,21 +112,38 @@ public class WindowController {
             JLabel label = new JLabel(p.getName()+" - "+p.getMMR());
             EmptyBorder insets = new EmptyBorder(50, 175, 50, 175);
             label.setBorder(insets);
-            label.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 50));
+            label.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 50));
             leaderboardInner.add(label);
             leaderboardInner.setVisible(true);
         }
-        leaderboardInner.setVisible(true);
         SwingUtilities.updateComponentTreeUI(frame);
+    }
+
+    public void updateMain(){
+
     }
 
     public boolean isActive(){
         return active;
     }
 
+    public void toggleLeaderboard(){
+        leaderboard = !leaderboard;
+        updateLeaderboard();
+        leaderboardPanel.setVisible(leaderboard);
+    }
+
+    public void toggleMain(){
+        main = !main;
+        updateMain();
+    }
 
     public void update() {
         tick++;
         if (tick % 300 == 0) updateLeaderboard();
+        if (tick % 500 == 0){
+            toggleLeaderboard();
+            toggleMain();
+        }
     }
 }

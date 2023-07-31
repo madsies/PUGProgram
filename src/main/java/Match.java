@@ -103,7 +103,7 @@ public class Match {
     }
 
     public boolean isGameOver(){
-        return (currentMap >= bestOf || teamOneScore > ceil((double) bestOf /2) || teamTwoScore > ceil((double) bestOf /2));
+        return ((currentMap >= bestOf && teamOneScore != teamTwoScore) || teamOneScore > ceil((double) bestOf /2) || teamTwoScore > ceil((double) bestOf /2));
     }
 
     public void calculateMMRAverage(){
